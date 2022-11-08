@@ -116,12 +116,15 @@ public class MeshGen : MonoBehaviour
 
             if (GenerateCollider)
             {
-                Destroy(filter.GetComponent<MeshCollider>());
+                /*Destroy(filter.GetComponent<MeshCollider>());
                 MeshCollider collider = filter.gameObject.AddComponent<MeshCollider>();
                 collider.sharedMesh = null;
-                collider.sharedMesh = segment.MeshFilter.mesh;
+                collider.sharedMesh = segment.MeshFilter.mesh;*/
+                Destroy(filter.GetComponent<MeshCollider>());
+                Destroy(filter.GetComponent<EdgeCollider2D>());
+                EdgeCollider2D collider = filter.gameObject.AddComponent<EdgeCollider2D>();
+                DrawColliderPaths(collider, mesh);
             }
-
             _usedSegments.Add(segment);
         }
     }
@@ -210,5 +213,16 @@ public class MeshGen : MonoBehaviour
     {
         public int Index { get; set; }
         public MeshFilter MeshFilter { get; set; }
+    }
+
+    public static void DrawColliderPaths(EdgeCollider2D collider, Mesh mesh)
+    {
+        var edges = mesh.vertices;
+        Vector2[] path2D = new Vector2[edges.Length];
+        for (int i = 0; i < edges.Length; i++)
+        {
+            path2D[i] = (new Vector2(edges[i].x, edges[i].y));
+        }
+        collider.points = path2D;
     }
 }
