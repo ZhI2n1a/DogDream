@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     public bool isGrounded = false;
     public bool move = false;
-    bool groundHit = false;
+    //bool groundHit = false;
 
     public Transform groundCheck;
     float groundRad = 0.1f;
