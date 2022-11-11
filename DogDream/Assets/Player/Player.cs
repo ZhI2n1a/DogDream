@@ -13,10 +13,10 @@ public class Player : MonoBehaviour
 
     public bool isGrounded = false;
     public bool move = false;
-    public bool groundHit = false;
+    bool groundHit = false;
 
     public Transform groundCheck;
-    float groundRad = 0.2f;
+    float groundRad = 0.1f;
     public LayerMask groundLayer;
 
     public Rigidbody2D rb;
@@ -42,7 +42,16 @@ public class Player : MonoBehaviour
 
     void DetectJump()
     {
-        //if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump") && isGrounded) { }
+
+        if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
+        {
+            if (isGrounded)
+            {
+                isGrounded = false;
+                rb.velocity = Vector2.up * jumpVelocity;
+            }
+            
+        }
 
         if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
         {
@@ -60,13 +69,10 @@ public class Player : MonoBehaviour
         {
             if (!isGrounded)
             {
-                rb.AddTorque(forwRotation * forwRotation, ForceMode2D.Force);
-
+                rb.AddTorque(backwRotation * Time.deltaTime, ForceMode2D.Force);
             }
             else
             {
-                isGrounded = false;
-                rb.velocity = Vector2.up * jumpVelocity;
                 //rb.AddForce(transform.up * jumpVelocity * Time.deltaTime * 100f, ForceMode2D.Force);
             }
         }
@@ -74,7 +80,7 @@ public class Player : MonoBehaviour
         {
             if (!isGrounded)
             {
-                rb.AddTorque(backwRotation * -1 * Time.deltaTime * 100f, ForceMode2D.Force);
+                rb.AddTorque(forwRotation * -1 * Time.deltaTime, ForceMode2D.Force);
             }
         }
     }
