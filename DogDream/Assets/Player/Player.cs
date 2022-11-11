@@ -107,6 +107,6 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
             cam.SetActive(false);
             looseUI.SetActive(true);
-        }*/
-    }
+        }
+    }*/
 }
