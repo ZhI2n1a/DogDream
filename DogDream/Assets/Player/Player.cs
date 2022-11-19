@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public float jumpVelocity;
     public float forwRotation;
     public float backwRotation;
+    public float distance = 0f;
 
     public bool fucked = false;
     public bool isGrounded = false;
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         PlayerSpeed();
+        distance += rb.velocity.x * Time.fixedDeltaTime;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
