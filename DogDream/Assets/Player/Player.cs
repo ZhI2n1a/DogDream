@@ -10,17 +10,17 @@ public class Player : MonoBehaviour
     public float forwRotation;
     public float backwRotation;
 
-
+    public bool fucked = false;
     public bool isGrounded = false;
     public bool move = false;
     //bool groundHit = false;
 
     public Transform groundCheck;
-    float groundRad = 0.1f;
+    float groundRad = 1f;
     public LayerMask groundLayer;
-
+    public Vector2 movement;
     public Rigidbody2D rb;
-    private BoxCollider2D boxColl;
+    public BoxCollider2D boxColl;
 
     void Start()
     {
@@ -32,13 +32,25 @@ public class Player : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRad, groundLayer);
         DetectJump();
-        PlayerSpeed();
+        
         RotatePlayer();
     }
 
     private void FixedUpdate()
     {
-        
+        PlayerSpeed();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!isGrounded) { fucked = true; }
+    }
+
+    //В этом методе позже будет реализовываться ускорение
+    private void PlayerSpeed()
+    {
+        movement = new Vector2(horizontalSpeed, rb.velocity.y);
+        if (!fucked) rb.velocity = movement;
     }
 
     void DetectJump()
@@ -70,7 +82,7 @@ public class Player : MonoBehaviour
         {
             if (!isGrounded)
             {
-                transform.Rotate(0, 0, backwRotation / 100, Space.Self);
+                transform.Rotate(0, 0, backwRotation / 1000, Space.Self);
                 //rb.AddTorque(backwRotation * Time.deltaTime, ForceMode2D.Force);
             }
             else
@@ -89,11 +101,8 @@ public class Player : MonoBehaviour
             }
         }
     }
-    //В этом методе позже будет реализовываться ускорение
-    private void PlayerSpeed()
-    {
-        rb.velocity = new Vector2(horizontalSpeed, rb.velocity.y);
-    }
+
+    
     /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
