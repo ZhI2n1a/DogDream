@@ -31,19 +31,20 @@ public class Player : MonoBehaviour
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRad, groundLayer);
-    }
-
-    private void FixedUpdate()
-    {
         DetectJump();
         PlayerSpeed();
         RotatePlayer();
     }
 
+    private void FixedUpdate()
+    {
+        
+    }
+
     void DetectJump()
     {
 
-        if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
+        /*if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
         {
             if (isGrounded)
             {
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour
                 rb.velocity = Vector2.up * jumpVelocity;
             }
             
-        }
+        }*/
 
         if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
         {
@@ -69,10 +70,13 @@ public class Player : MonoBehaviour
         {
             if (!isGrounded)
             {
-                rb.AddTorque(backwRotation * Time.deltaTime, ForceMode2D.Force);
+                transform.Rotate(0, 0, backwRotation / 100, Space.Self);
+                //rb.AddTorque(backwRotation * Time.deltaTime, ForceMode2D.Force);
             }
             else
             {
+                isGrounded = false;
+                rb.velocity = Vector2.up * jumpVelocity;
                 //rb.AddForce(transform.up * jumpVelocity * Time.deltaTime * 100f, ForceMode2D.Force);
             }
         }
@@ -80,7 +84,8 @@ public class Player : MonoBehaviour
         {
             if (!isGrounded)
             {
-                rb.AddTorque(forwRotation * -1 * Time.deltaTime, ForceMode2D.Force);
+                transform.Rotate(0, 0, forwRotation / -1000, Space.Self);
+                //rb.AddTorque(forwRotation * -1 * Time.deltaTime, ForceMode2D.Force);
             }
         }
     }
