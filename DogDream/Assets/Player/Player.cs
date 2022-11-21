@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!isGrounded) { fucked = true; }
+        //if (!isGrounded) { fucked = true; }
     }
 
     //В этом методе позже будет реализовываться ускорение
