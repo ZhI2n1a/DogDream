@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalSpeed: 5
-  jumpVelocity: 20
+  jumpVelocity: 5
   forwRotation: 30
   backwRotation: 80
   distance: 0
@@ -342,7 +342,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &344218455
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -706,6 +706,10 @@ PrefabInstance:
     - target: {fileID: 118736, guid: 47732a01ac6bbd348b9699c461bb1f4f, type: 3}
       propertyPath: m_Name
       value: Segment
+      objectReference: {fileID: 0}
+    - target: {fileID: 118736, guid: 47732a01ac6bbd348b9699c461bb1f4f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 406632, guid: 47732a01ac6bbd348b9699c461bb1f4f, type: 3}
       propertyPath: m_RootOrder
