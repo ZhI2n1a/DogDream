@@ -14,14 +14,16 @@ public class Player : MonoBehaviour
     public bool fucked = false;
     public bool isGrounded = false;
     public bool move = false;
+    public bool controlling = true;
     //bool groundHit = false;
 
     public Transform groundCheck;
     float groundRad = 1f;
     public LayerMask groundLayer;
-    public Vector2 movement;
+    public Vector3 movement;
     public Rigidbody2D rb;
     public BoxCollider2D boxColl;
+    
 
     void Start()
     {
@@ -32,9 +34,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRad, groundLayer);
-        DetectJump();
-        
-        RotatePlayer();
+        if (controlling)
+        {
+            DetectJump();
+            RotatePlayer();
+        }
     }
 
     private void FixedUpdate()
@@ -45,13 +49,23 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (!isGrounded) { fucked = true; }
+        if (isGrounded && ((transform.eulerAngles.z >= 90.0f && transform.eulerAngles.z <= 270.0f) || (transform.eulerAngles.z >= 270.0f && transform.eulerAngles.z <= 90.0f))) 
+        { 
+            fucked = true;
+            controlling = false;
+        }
+
+        if (fucked == false)
+        {
+            transform.rotation = Quaternion.Euler(0,0,0);
+        }
+
     }
 
     //В этом методе позже будет реализовываться ускорение
     private void PlayerSpeed()
     {
-        movement = new Vector2(horizontalSpeed, rb.velocity.y);
+        movement = new Vector3(horizontalSpeed, rb.velocity.y, rb.transform.eulerAngles.z);
         if (!fucked) rb.velocity = movement;
     }
 
@@ -70,17 +84,32 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
         {
-            move = true;
+            if (isGrounded)
+            {
+                GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
+            }
         }
-        if (Input.GetButtonUp("Fire1") || Input.GetButtonUp("Jump"))
+        /*if (Input.GetButtonUp("Fire1") || Input.GetButtonUp("Jump"))
         {
             move = false;
-        }
+        }*/
     }
 
     public void RotatePlayer()
     {
-        if (move)
+        if (Input.GetButton("Fire1") || Input.GetButton("Jump"))
+        {
+            if (!isGrounded)
+            {
+                transform.Rotate(Vector3.back * backwRotation * Time.deltaTime * (-1));
+            }
+        }
+
+        if (!isGrounded)
+        {
+            transform.Rotate(Vector3.forward * forwRotation * Time.deltaTime * (-1));
+        }
+        /*if (move)
         {
             if (!isGrounded)
             {
@@ -101,7 +130,7 @@ public class Player : MonoBehaviour
                 transform.Rotate(0, 0, forwRotation / -1000, Space.Self);
                 //rb.AddTorque(forwRotation * -1 * Time.deltaTime, ForceMode2D.Force);
             }
-        }
+        }*/
     }
 
     

@@ -282,9 +282,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalSpeed: 5
-  jumpVelocity: 5
-  forwRotation: 30
-  backwRotation: 80
+  jumpVelocity: 10
+  forwRotation: 100
+  backwRotation: 500
   distance: 0
   fucked: 0
   isGrounded: 0
