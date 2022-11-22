@@ -60,6 +60,11 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(0,0,0);
         }
 
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            fucked = true;
+            controlling = false;
+        }
     }
 
     //В этом методе позже будет реализовываться ускорение
