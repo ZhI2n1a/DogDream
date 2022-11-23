@@ -473,11 +473,12 @@ MonoBehaviour:
   fucked: 0
   isGrounded: 0
   move: 0
+  controlling: 1
   groundCheck: {fileID: 233875965}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  movement: {x: 0, y: 0}
+  movement: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
   boxColl: {fileID: 0}
 --- !u!1 &1430191336
@@ -696,7 +697,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "0 \u043C"
+  m_Text: 0
 --- !u!222 &1616078004
 CanvasRenderer:
   m_ObjectHideFlags: 0
