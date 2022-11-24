@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     public bool isGrounded = false;
     public bool move = false;
     public bool controlling = true;
+    public GameObject deathScreen;
     //bool groundHit = false;
 
     public Transform groundCheck;
@@ -53,6 +55,12 @@ public class Player : MonoBehaviour
         { 
             fucked = true;
             controlling = false;
+
+            if (!deathScreen.activeSelf)
+            {
+                deathScreen.SetActive(true);
+
+            }
         }
 
         if (fucked == false)
@@ -64,6 +72,12 @@ public class Player : MonoBehaviour
         {
             fucked = true;
             controlling = false;
+
+            if (!deathScreen.activeSelf)
+            {
+                deathScreen.SetActive(true);
+
+            }
         }
     }
 
@@ -86,12 +100,14 @@ public class Player : MonoBehaviour
             }
             
         }*/
-
-        if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            if (isGrounded)
+            if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
             {
-                GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
+                if (isGrounded)
+                {
+                    GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
+                }
             }
         }
         /*if (Input.GetButtonUp("Fire1") || Input.GetButtonUp("Jump"))
@@ -102,17 +118,20 @@ public class Player : MonoBehaviour
 
     public void RotatePlayer()
     {
-        if (Input.GetButton("Fire1") || Input.GetButton("Jump"))
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
+            if (Input.GetButton("Fire1") || Input.GetButton("Jump"))
+            {
+                if (!isGrounded)
+                {
+                    transform.Rotate(Vector3.back * backwRotation * Time.deltaTime * (-1));
+                }
+            }
+
             if (!isGrounded)
             {
-                transform.Rotate(Vector3.back * backwRotation * Time.deltaTime * (-1));
+                transform.Rotate(Vector3.forward * forwRotation * Time.deltaTime * (-1));
             }
-        }
-
-        if (!isGrounded)
-        {
-            transform.Rotate(Vector3.forward * forwRotation * Time.deltaTime * (-1));
         }
         /*if (move)
         {
