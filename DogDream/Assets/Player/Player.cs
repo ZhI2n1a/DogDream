@@ -20,17 +20,20 @@ public class Player : MonoBehaviour
     //bool groundHit = false;
 
     public Transform groundCheck;
-    float groundRad = 0.1f;
+    float groundRad = 0.5f;
     public LayerMask groundLayer;
     public Vector3 movement;
     public Rigidbody2D rb;
-    public BoxCollider2D boxColl;
-    
+    public CapsuleCollider2D boxColl;
+
+    private float preRotZ = 0f;
+    private float sumRotZ = 0f;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        boxColl = GetComponent<BoxCollider2D>();
+        boxColl = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
@@ -41,6 +44,39 @@ public class Player : MonoBehaviour
             DetectJump();
             RotatePlayer();
         }
+
+        if (!isGrounded)
+        {
+            ChechBackFliip();
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+        else rb.constraints = RigidbodyConstraints2D.None;
+    }
+
+    private void ChechBackFliip()
+    {
+            float rotZ = transform.eulerAngles.z;
+            Debug.Log(sumRotZ);
+            if (rotZ > preRotZ)
+            {
+                sumRotZ += rotZ - preRotZ;
+            }
+            else sumRotZ = 0;
+
+            preRotZ = rotZ;
+
+            if (sumRotZ > 250)
+            {
+                StartCoroutine(SpeedBoost(5));
+            }
+    }
+
+    private IEnumerator SpeedBoost(float time)
+    {
+
+        horizontalSpeed = 6;
+        yield return new WaitForSeconds(time);
+        horizontalSpeed = 5;
     }
 
     private void FixedUpdate()
@@ -59,13 +95,7 @@ public class Player : MonoBehaviour
             if (!deathScreen.activeSelf)
             {
                 deathScreen.SetActive(true);
-
             }
-        }
-
-        if (fucked == false)
-        {
-            transform.rotation = Quaternion.Euler(0,0,0);
         }
 
         if (collision.gameObject.tag == "Obstacle")
@@ -76,30 +106,20 @@ public class Player : MonoBehaviour
             if (!deathScreen.activeSelf)
             {
                 deathScreen.SetActive(true);
-
             }
         }
+
+        //StartCoroutine(SpeedBoost(10));
     }
 
-    //В этом методе позже будет реализовываться ускорение
     private void PlayerSpeed()
     {
-        movement = new Vector3(horizontalSpeed, rb.velocity.y, rb.transform.eulerAngles.z);
+        movement = new Vector3(horizontalSpeed, rb.velocity.y);
         if (!fucked) rb.velocity = movement;
     }
 
     void DetectJump()
     {
-
-        /*if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
-        {
-            if (isGrounded)
-            {
-                isGrounded = false;
-                rb.velocity = Vector2.up * jumpVelocity;
-            }
-            
-        }*/
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
@@ -110,10 +130,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        /*if (Input.GetButtonUp("Fire1") || Input.GetButtonUp("Jump"))
-        {
-            move = false;
-        }*/
     }
 
     public void RotatePlayer()
@@ -133,24 +149,5 @@ public class Player : MonoBehaviour
                 transform.Rotate(Vector3.forward * forwRotation * Time.deltaTime * (-1));
             }
         }
-        /*if (move)
-        {
-            if (!isGrounded)
-            {
-                transform.Rotate(0, 0, backwRotation / 1000, Space.Self);
-            }
-            else
-            {
-                isGrounded = false;
-                rb.velocity = Vector2.up * jumpVelocity;
-            }
-        }
-        else
-        {
-            if (!isGrounded)
-            {
-                transform.Rotate(0, 0, forwRotation / -1000, Space.Self);
-            }
-        }*/
     }
 }

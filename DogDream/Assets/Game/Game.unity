@@ -866,7 +866,7 @@ GameObject:
   - component: {fileID: 344218456}
   - component: {fileID: 344218455}
   - component: {fileID: 344218454}
-  - component: {fileID: 344218453}
+  - component: {fileID: 344218457}
   - component: {fileID: 344218452}
   m_Layer: 0
   m_Name: "\u0418\u0433\u0440\u043E\u043A"
@@ -888,7 +888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalSpeed: 5
-  jumpVelocity: 9
+  jumpVelocity: 10
   forwRotation: 100
   backwRotation: 500
   distance: 0
@@ -902,34 +902,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   movement: {x: 0, y: 0, z: 0}
-  rb: {fileID: 0}
-  boxColl: {fileID: 0}
---- !u!61 &344218453
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 344218451}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0035846233, y: -0.11700538}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.0824723, y: 1.2340105}
-  m_EdgeRadius: 0
+  rb: {fileID: 344218454}
+  boxColl: {fileID: 344218457}
 --- !u!50 &344218454
 Rigidbody2D:
   serializedVersion: 4
@@ -944,13 +918,13 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 10
   m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!212 &344218455
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1019,6 +993,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &344218457
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344218451}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 2.5, y: 1.0000001}
+  m_Direction: 1
 --- !u!1 &350717452
 GameObject:
   m_ObjectHideFlags: 0
