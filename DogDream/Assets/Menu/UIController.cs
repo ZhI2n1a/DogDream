@@ -14,8 +14,6 @@ public class UIController : MonoBehaviour
         player = GameObject.Find("Игрок").GetComponent<Player>();
         distance = GameObject.Find("Distance").GetComponent<Text>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         distance.text = Mathf.FloorToInt(player.distance) + "";

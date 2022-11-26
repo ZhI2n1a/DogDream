@@ -52,8 +52,14 @@ public class Player : MonoBehaviour
         }
         else
         {
-            rb.gravityScale = 3;
+            rb.gravityScale = 2.5f;
             rb.constraints = RigidbodyConstraints2D.None;
+        }
+
+        if (fucked)
+        {
+            LevelManager.instance.GameOver();
+            gameObject.SetActive(false);
         }
     }
 
