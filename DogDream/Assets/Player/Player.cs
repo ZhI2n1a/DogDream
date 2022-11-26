@@ -16,7 +16,6 @@ public class Player : MonoBehaviour
     public bool isGrounded = false;
     public bool move = false;
     public bool controlling = true;
-    public GameObject deathScreen;
     //bool groundHit = false;
 
     public Transform groundCheck;
@@ -47,28 +46,38 @@ public class Player : MonoBehaviour
 
         if (!isGrounded)
         {
+            rb.gravityScale = 2;
             ChechBackFliip();
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-        else rb.constraints = RigidbodyConstraints2D.None;
+        else
+        {
+            rb.gravityScale = 3;
+            rb.constraints = RigidbodyConstraints2D.None;
+        }
     }
 
     private void ChechBackFliip()
     {
-            float rotZ = transform.eulerAngles.z;
-            Debug.Log(sumRotZ);
-            if (rotZ > preRotZ)
+        if (Input.GetButton("Fire1") || Input.GetButton("Jump"))
+        {
+            if (transform.rotation.z > 0)
             {
-                sumRotZ += rotZ - preRotZ;
-            }
-            else sumRotZ = 0;
+                float rotZ = transform.eulerAngles.z;
+                if (rotZ > preRotZ)
+                {
+                    sumRotZ += rotZ - preRotZ;
+                }
+                else sumRotZ = 0;
 
-            preRotZ = rotZ;
+                preRotZ = rotZ;
 
-            if (sumRotZ > 250)
-            {
-                StartCoroutine(SpeedBoost(5));
+                if (sumRotZ > 160)
+                {
+                    StartCoroutine(SpeedBoost(5));
+                }
             }
+        }
     }
 
     private IEnumerator SpeedBoost(float time)
@@ -91,25 +100,13 @@ public class Player : MonoBehaviour
         { 
             fucked = true;
             controlling = false;
-
-            if (!deathScreen.activeSelf)
-            {
-                deathScreen.SetActive(true);
-            }
         }
 
         if (collision.gameObject.tag == "Obstacle")
         {
             fucked = true;
             controlling = false;
-
-            if (!deathScreen.activeSelf)
-            {
-                deathScreen.SetActive(true);
-            }
         }
-
-        //StartCoroutine(SpeedBoost(10));
     }
 
     private void PlayerSpeed()
