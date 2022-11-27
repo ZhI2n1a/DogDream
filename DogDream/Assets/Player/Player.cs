@@ -59,7 +59,6 @@ public class Player : MonoBehaviour
         if (fucked)
         {
             LevelManager.instance.GameOver();
-            gameObject.SetActive(false);
         }
     }
 
