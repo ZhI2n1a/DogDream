@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            rb.gravityScale = 2.5f;
+
             rb.constraints = RigidbodyConstraints2D.None;
         }
 
