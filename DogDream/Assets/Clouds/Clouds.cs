@@ -7,13 +7,7 @@ public class Clouds : MonoBehaviour
     public GameObject[] clouds;
     public float time = 2f;
     float timer = 0f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         timer -= Time.deltaTime;

@@ -8,11 +8,6 @@ public class Cloud : MonoBehaviour
 
     Sprite cloud;
 
-    private void Start()
-    {
-        
-    }
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector2.left * Time.deltaTime);

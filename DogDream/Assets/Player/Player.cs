@@ -46,13 +46,13 @@ public class Player : MonoBehaviour
 
         if (!isGrounded)
         {
-            rb.gravityScale = 2;
+            rb.gravityScale = 2f;
             ChechBackFliip();
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
         else
         {
-
+            rb.gravityScale = 2.5f;
             rb.constraints = RigidbodyConstraints2D.None;
         }
 
