@@ -167,9 +167,10 @@ public class MeshGen : MonoBehaviour
     // Modify this fuction to get different terrain configuration.
     private float GetHeight(float position)
     {
-        /*return (0.75f*Mathf.Sin(position) + 5f + Mathf.Sin(position * 1.75f)*0.25f + 1f) / 2f;*/
+        /*return (0.75f * Mathf.Sin(position) + 5f + Mathf.Sin(position * 1.75f) * 0.25f + 1f) / 2f;*/
         /*return (Mathf.Sin(position) + 1.5f + Mathf.Sin(position * 1.75f)  + 1f) / 2f;*/
-        return (Mathf.PerlinNoise(0, Mathf.Sin(position)) + Mathf.Sin(position) + 1.5f + Mathf.Sin(position * 1.75f) * 0.5f + 1f) / 2f;
+        return (Mathf.PerlinNoise(0, Mathf.Sin(position)) + Mathf.Sin(position) + 1.5f + Mathf.Sin(position * 1.75f) * 0.5f + 10f) / 2f;
+       /* return ((0.75f * Mathf.Sin(position) + 5f + Mathf.Sin(position * 1.75f) * 0.1f) / 2f);*/
     }
     
     // This function generates a mesh segment.

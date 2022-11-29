@@ -4,46 +4,38 @@ using UnityEngine;
 
 public class Fog : MonoBehaviour
 {
-    Transform Player;
-    public bool _playerFell = false;
-    public float offsetX;
-    int count;
+    Player Player;
 
+    Camera cam;
+    public Sprite fog;
+    public float speed = 2;
+    public bool dead;
 
-    float speed = 3;
+    bool _fog = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_playerFell)
+        dead = Player.GetFucked();
+        if (dead)
         {
-            count++;
-            _playerFell = false;
-        }
-
-        if (count == 1)
-        {
-            transform.position = new Vector2(Player.position.x - offsetX, Player.position.y);
-        }
-
-        if (count == 2)
-        {
-            transform.Translate(speed * Time.deltaTime, 0, 0);
-        }
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            Debug.Log("Game Over!");
+            if (!_fog)
+            {
+                transform.position = new Vector3(cam.transform.position.x - transform.localScale.x, cam.transform.position.y, transform.position.z);
+            }
+            if (transform.position.x < cam.transform.position.x)
+            {
+                /*transform.position = new Vector3(screenPosition.x, transform.position.y, transform.position.z);*/
+                _fog = true;
+                transform.Translate(Time.deltaTime * Vector2.right * speed);
+            }
         }
     }
 }

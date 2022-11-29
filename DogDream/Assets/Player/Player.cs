@@ -152,4 +152,9 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    public bool GetFucked()
+    {
+        return fucked;
+    }
 }
