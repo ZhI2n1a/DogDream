@@ -8,13 +8,8 @@ public class Cloud : MonoBehaviour
 
     Sprite cloud;
 
-    void Update()
+    private void OnBecameInvisible()
     {
-        transform.Translate(Vector2.left * Time.deltaTime);
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        if (screenPosition.x < -5)
-        {
-            Destroy(transform.gameObject);
-        }
+        Destroy(gameObject);
     }
 }

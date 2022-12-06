@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class Clouds : MonoBehaviour
 {
-    public GameObject[] clouds;
-    public float time = 2f;
-    float timer = 0f;
+    public Cloud[] clouds;
 
-    void Update()
+    private void OnBecameVisible()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0)
-        {
-            Instantiate(clouds[Random.Range(0,2)], new Vector2(transform.position.x, transform.position.y + Random.Range(-1, 2)), Quaternion.identity);
-            timer = time;
-        }
+        CreateCloud(transform.position);
+    }
+
+    public void CreateCloud(Vector3 pos)
+    {
+        Instantiate(clouds[Random.Range(0, 2)], new Vector2(pos.x + 10f + Random.Range(-2, 2), pos.y + 12f + Random.Range(-2, 2)), Quaternion.identity);
     }
 }

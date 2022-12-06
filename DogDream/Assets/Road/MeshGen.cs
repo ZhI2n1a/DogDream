@@ -64,7 +64,7 @@ public class MeshGen : MonoBehaviour
             _freeMeshFilters.Add(filter);
         }
     }
-    
+
     void Update()
     {
         Vector3 worldCenter = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
@@ -126,6 +126,7 @@ public class MeshGen : MonoBehaviour
                 DrawColliderPaths(collider, mesh);
             }
             _usedSegments.Add(segment);
+
         }
     }
     
@@ -167,9 +168,9 @@ public class MeshGen : MonoBehaviour
     // Modify this fuction to get different terrain configuration.
     private float GetHeight(float position)
     {
-        /*return (0.75f * Mathf.Sin(position) + 5f + Mathf.Sin(position * 1.75f) * 0.25f + 1f) / 2f;*/
+        return (0.75f * Mathf.Sin(position) + 5f + Mathf.Sin(position * 1.75f) * 0.25f + 7f) / 2f;
         /*return (Mathf.Sin(position) + 1.5f + Mathf.Sin(position * 1.75f)  + 1f) / 2f;*/
-        return (Mathf.PerlinNoise(0, Mathf.Sin(position)) + Mathf.Sin(position) + 1.5f + Mathf.Sin(position * 1.75f) * 0.5f + 10f) / 2f;
+        // return (Mathf.PerlinNoise(0, Mathf.Sin(position)) + Mathf.Sin(position) + 1.5f + Mathf.Sin(position * 1.75f) * 0.5f + 10f) / 2f;
        /* return ((0.75f * Mathf.Sin(position) + 5f + Mathf.Sin(position * 1.75f) * 0.1f) / 2f);*/
     }
     
@@ -191,9 +192,11 @@ public class MeshGen : MonoBehaviour
             _vertexArray[i * 2] = new Vector3(xPos, yPosTop, 0);
             
             // bottom vertex always at y=0
-            _vertexArray[i * 2 + 1] = new Vector3(xPos, 0, 0);         
+            _vertexArray[i * 2 + 1] = new Vector3(xPos, 0, 0);
+
+            
         }
-        
+
         mesh.vertices = _vertexArray;
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
