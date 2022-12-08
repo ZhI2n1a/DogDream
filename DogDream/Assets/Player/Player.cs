@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
     private float preRotZ = 0f;
     private float sumRotZ = 0f;
 
+    public AudioSource GroundSound;
+    public AudioSource JumpSound;
+    public AudioSource LandingSoound;
+    public AudioSource DeadSound;
 
     void Start()
     {
@@ -49,6 +53,7 @@ public class Player : MonoBehaviour
             rb.gravityScale = 2f;
             ChechBackFliip();
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            LandingSoound.Play();
         }
         else
         {
@@ -59,6 +64,11 @@ public class Player : MonoBehaviour
         if (fucked)
         {
             LevelManager.instance.GameOver();
+        }
+
+        if (!isGrounded || fucked)
+        {
+            GroundSound.Play();
         }
     }
 
@@ -88,9 +98,9 @@ public class Player : MonoBehaviour
     private IEnumerator SpeedBoost(float time)
     {
 
-        horizontalSpeed = 6;
+        horizontalSpeed = 8;
         yield return new WaitForSeconds(time);
-        horizontalSpeed = 5;
+        horizontalSpeed = 7;
     }
 
     private void FixedUpdate()
@@ -101,7 +111,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isGrounded && ((transform.eulerAngles.z >= 90.0f && transform.eulerAngles.z <= 270.0f) || (transform.eulerAngles.z >= 270.0f && transform.eulerAngles.z <= 90.0f))) 
+        if (isGrounded && ((transform.eulerAngles.z >= 90.0f && transform.eulerAngles.z <= 300.0f) || (transform.eulerAngles.z >= 300.0f && transform.eulerAngles.z <= 90.0f))) 
         { 
             fucked = true;
             controlling = false;
@@ -128,6 +138,7 @@ public class Player : MonoBehaviour
             {
                 if (isGrounded)
                 {
+                    JumpSound.Play();
                     GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
                 }
             }

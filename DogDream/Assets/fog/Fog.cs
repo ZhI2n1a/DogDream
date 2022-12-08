@@ -28,7 +28,7 @@ public class Fog : MonoBehaviour
         {
             if (!_fog)
             {
-                transform.position = new Vector3(cam.transform.position.x - transform.localScale.x, cam.transform.position.y, transform.position.z);
+                transform.position = new Vector3(cam.transform.position.x - 24, cam.transform.position.y, transform.position.z);
             }
             if (transform.position.x < cam.transform.position.x)
             {
