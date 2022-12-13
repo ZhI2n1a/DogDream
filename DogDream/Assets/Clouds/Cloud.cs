@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Cloud : MonoBehaviour
 {
-
-
     Sprite cloud;
 
-    private void OnBecameInvisible()
+    private void OnDisable()
     {
         Destroy(gameObject);
     }

@@ -19,11 +19,8 @@ public class MeshGen : MonoBehaviour
 
     void Awake()
     {
-        // Create vertex array helper
         _vertexArray = new Vector3[SegmentResolution * 2];
         
-        // Build triangles array. For all meshes this array always will
-        // look the same, so I am generating it once 
         int iterations = _vertexArray.Length / 2 - 1;
         var triangles = new int[(_vertexArray.Length - 2) * 3];
         
@@ -41,15 +38,12 @@ public class MeshGen : MonoBehaviour
             triangles[i2 + 5] = i3 + 1;
         }
         
-        // Create colors array. For now make it all white.
         var colors = new Color32[_vertexArray.Length];
         for (int i = 0; i < colors.Length; ++i)
         {
             colors[i] = new Color32(255, 255, 255, 255);
         }
-        
-        // Create game objects (with MeshFilter) instances.
-        // Assign vertices, triangles, deactivate and add to the pool.
+
         for (int i = 0; i < MeshCount; ++i)
         {
             MeshFilter filter = Instantiate(SegmentPrefab);
@@ -70,7 +64,6 @@ public class MeshGen : MonoBehaviour
         Vector3 worldCenter = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
         int currentSegment = (int) (worldCenter.x / SegmentLength);
         
-        // test for invisibility
         for (int i = 0; i < _usedSegments.Count;)
         {
             int segmentIndex = _usedSegments[i].Index;
@@ -78,13 +71,10 @@ public class MeshGen : MonoBehaviour
             {
                 EnsureSegmentNotVisible(segmentIndex);
             } else {
-                // EnsureSegmentNotVisible will remove the segment from the list
-                // that's why I increase the counter based on that condition
                 ++i;
             }
         }
         
-        // test for visibility
         for (int i = currentSegment - VisibleMeshes / 2; i < currentSegment + VisibleMeshes / 2; ++i)
         {
             if (IsSegmentInSight(i))
@@ -98,7 +88,6 @@ public class MeshGen : MonoBehaviour
     {
         if (!IsSegmentVisible(index))
         {
-            // make visible
             int meshIndex = _freeMeshFilters.Count - 1;
             MeshFilter filter = _freeMeshFilters[meshIndex];
             _freeMeshFilters.RemoveAt(meshIndex);
@@ -109,17 +98,12 @@ public class MeshGen : MonoBehaviour
             filter.transform.position = new Vector3(index * SegmentLength, 0, 0);
             filter.gameObject.SetActive(true);
             
-            // register as segment
             var segment = new Segment();
             segment.Index = index;
             segment.MeshFilter = filter;
 
             if (GenerateCollider)
             {
-                /*Destroy(filter.GetComponent<MeshCollider>());
-                MeshCollider collider = filter.gameObject.AddComponent<MeshCollider>();
-                collider.sharedMesh = null;
-                collider.sharedMesh = segment.MeshFilter.mesh;*/
                 Destroy(filter.GetComponent<MeshCollider>());
                 Destroy(filter.GetComponent<EdgeCollider2D>());
                 EdgeCollider2D collider = filter.gameObject.AddComponent<EdgeCollider2D>();
@@ -163,20 +147,12 @@ public class MeshGen : MonoBehaviour
         
         return -1;
     }
-    
-    // Gets the heigh of terrain at current position.
-    // Modify this fuction to get different terrain configuration.
+
     private float GetHeight(float position)
     {
         return (0.75f * Mathf.Sin(position) + 5f + Mathf.Sin(position * 1.75f) * 0.25f + 7f) / 2f;
-        /*return (Mathf.Sin(position) + 1.5f + Mathf.Sin(position * 1.75f)  + 1f) / 2f;*/
-        // return (Mathf.PerlinNoise(0, Mathf.Sin(position)) + Mathf.Sin(position) + 1.5f + Mathf.Sin(position * 1.75f) * 0.5f + 10f) / 2f;
-       /* return ((0.75f * Mathf.Sin(position) + 5f + Mathf.Sin(position * 1.75f) * 0.1f) / 2f);*/
     }
-    
-    // This function generates a mesh segment.
-    // Index is a segment index (starting with 0).
-    // Mesh is a mesh that this segment should be written to.
+
     public void GenerateSegment(int index, ref Mesh mesh)
     {
         float startPosition = index * SegmentLength;
