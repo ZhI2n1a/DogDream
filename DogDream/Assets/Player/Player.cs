@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public float forwRotation;
     public float backwRotation;
     public float distance = 0f;
+    public float bones = 0f;
 
     public bool fucked = false;
     public bool isGrounded = false;
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        groundCheck = GameObject.Find("GroundCheck").GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         boxColl = GetComponent<CapsuleCollider2D>();
     }
@@ -121,6 +123,15 @@ public class Player : MonoBehaviour
         {
             fucked = true;
             controlling = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Boner"))
+        {
+            bones++;
+            Destroy(collision.gameObject);
         }
     }
 
