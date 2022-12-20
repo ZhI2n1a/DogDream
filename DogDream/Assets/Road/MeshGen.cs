@@ -173,6 +173,14 @@ public class MeshGen : MonoBehaviour
             
         }
 
+        Vector2[] uvs = new Vector2[_vertexArray.Length];
+
+        for (int i = 0; i < uvs.Length; i++)
+        {
+            uvs[i] = new Vector2(_vertexArray[i].x, _vertexArray[i].y);
+        }
+        mesh.uv = uvs;
+
         mesh.vertices = _vertexArray;
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();

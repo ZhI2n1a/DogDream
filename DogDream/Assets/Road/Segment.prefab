@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3314814}
   - component: {fileID: 2389324}
   - component: {fileID: 699217057133806361}
+  - component: {fileID: 7974320043656067132}
   m_Layer: 0
   m_Name: Segment
   m_TagString: Untagged
@@ -106,3 +107,23 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &7974320043656067132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d668850a03855fe42b1209a92d4f5949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listTextures:
+  - name: Road
+    index: 0
+    defaultTexture: 0
+    minSteepness: 0
+    maxSteepness: 0
+    minAltitude: 0
+    maxAltitude: 0

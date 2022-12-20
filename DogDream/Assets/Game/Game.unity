@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1323,6 +1323,7 @@ MonoBehaviour:
   forwRotation: 100
   backwRotation: 500
   distance: 0
+  bones: 0
   fucked: 0
   isGrounded: 0
   move: 0
@@ -4567,6 +4568,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 118736, guid: 47732a01ac6bbd348b9699c461bb1f4f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 406632, guid: 47732a01ac6bbd348b9699c461bb1f4f, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -4611,7 +4616,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2389324, guid: 47732a01ac6bbd348b9699c461bb1f4f, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389324, guid: 47732a01ac6bbd348b9699c461bb1f4f, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389324, guid: 47732a01ac6bbd348b9699c461bb1f4f, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389324, guid: 47732a01ac6bbd348b9699c461bb1f4f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90a063ea178c30d4eba82adc229811cc, type: 2}
+    m_RemovedComponents:
+    - {fileID: 7974320043656067132, guid: 47732a01ac6bbd348b9699c461bb1f4f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 47732a01ac6bbd348b9699c461bb1f4f, type: 3}
 --- !u!1 &1666700053
 GameObject:
