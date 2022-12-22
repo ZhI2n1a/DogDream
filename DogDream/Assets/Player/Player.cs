@@ -99,7 +99,6 @@ public class Player : MonoBehaviour
 
     private IEnumerator SpeedBoost(float time)
     {
-
         horizontalSpeed = 8;
         yield return new WaitForSeconds(time);
         horizontalSpeed = 7;
