@@ -34,6 +34,9 @@ public class Player : MonoBehaviour
     public AudioSource LandingSoound;
     public AudioSource DeadSound;
 
+    public bool BonusSofaMode = false;
+    public GameObject BonusSofaCurrent;
+
     void Start()
     {
         groundCheck = GameObject.Find("GroundCheck").GetComponent<Transform>();
@@ -72,6 +75,11 @@ public class Player : MonoBehaviour
         {
             GroundSound.Play();
         }
+
+        if (BonusSofaMode == true)
+        {
+            
+        }
     }
 
     private void ChechBackFliip()
@@ -91,17 +99,34 @@ public class Player : MonoBehaviour
 
                 if (sumRotZ > 160)
                 {
-                    StartCoroutine(SpeedBoost(5));
+                    bones += 5;
+                    //StartCoroutine(SpeedBoost(10));
                 }
             }
         }
     }
 
-    private IEnumerator SpeedBoost(float time)
+    //private IEnumerator SpeedBoost(float time)
+    //{
+    //    horizontalSpeed = 8;
+    //    yield return new WaitForSeconds(time);
+    //    horizontalSpeed = 7;
+    //}
+
+    private IEnumerator BonusSofaTime(float time)
     {
-        horizontalSpeed = 8;
+        BonusSofaMode = true;
+        horizontalSpeed = 9;
+        jumpVelocity = 7;
+        forwRotation = 50;
+        backwRotation = 250;
         yield return new WaitForSeconds(time);
+        Destroy(BonusSofaCurrent);
+        BonusSofaMode = false;
         horizontalSpeed = 7;
+        jumpVelocity = 10;
+        forwRotation = 100;
+        backwRotation = 500;
     }
 
     private void FixedUpdate()
@@ -131,6 +156,15 @@ public class Player : MonoBehaviour
         {
             bones++;
             Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "BonusSofa")
+        {
+            StartCoroutine(BonusSofaTime(10));
+            BonusSofaCurrent = collision.gameObject;
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            collision.gameObject.transform.SetParent(gameObject.transform);
+            collision.gameObject.transform.Translate(0, 0, 0);
         }
     }
 
