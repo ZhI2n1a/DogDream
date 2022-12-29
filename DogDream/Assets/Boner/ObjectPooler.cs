@@ -10,10 +10,6 @@ public class ObjectPooler : MonoBehaviour
 
     List<GameObject> pooledObjects;
 
-    private void Awake()
-    {
-
-    }
 
     private void Start()
     {
