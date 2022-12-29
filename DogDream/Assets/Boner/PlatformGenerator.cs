@@ -29,13 +29,13 @@ public class PlatformGenerator : MonoBehaviour
             if (Random.Range(1f, 100f) < boneSpawnRate)
             {
                 boneGenerator.SpawnBone(new Vector3(transform.position.x,
-                    transform.position.y + 1f, transform.position.z));
+                    transform.position.y + 20f, transform.position.z));
             }
 
             transform.position = new Vector3(transform.position.x + platWidth + range,
                 transform.position.y, transform.position.z);
 
-            Instantiate(ground, transform.position, transform.rotation);
+            //Instantiate(ground, transform.position, transform.rotation);
         }
     }
 }
