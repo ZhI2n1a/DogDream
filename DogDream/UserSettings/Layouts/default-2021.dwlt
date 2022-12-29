@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Game
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -357,33 +357,33 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Game
+    - Assets/Backgrounds
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Game
+  - Assets/Backgrounds
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\ZhI2n1a\Documents\GitHub\DogDream\DogDream
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 5}
-    m_SelectedIDs: 7a620000
-    m_LastClickedID: 25210
-    m_ExpandedIDs: 000000005e620000606200006262000064620000666200006862000000ca9a3b
+    m_SelectedIDs: a8620000
+    m_LastClickedID: 25256
+    m_ExpandedIDs: 000000009462000096620000986200009a6200009c6200009e62000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Menu
-      m_OriginalName: Menu
+      m_Name: Backgrounds
+      m_OriginalName: Backgrounds
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 25212
+      m_UserData: 25256
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -400,7 +400,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000005e6200006062000062620000646200006662000068620000
+    m_ExpandedIDs: 000000009462000096620000986200009a6200009c6200009e620000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -427,7 +427,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000b6770000a8620000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -795,9 +795,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.3281714, y: 9.14031, z: 10.396523}
+    m_Target: {x: 52.367085, y: 6.830963, z: 0.013761794}
     speed: 2
-    m_Value: {x: 1.617142, y: 9.240565, z: 10.399335}
+    m_Value: {x: 52.367085, y: 6.830963, z: 0.013761794}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -828,7 +828,7 @@ MonoBehaviour:
       m_Fade:
         m_Target: 0
         speed: 2
-        m_Value: 1
+        m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
@@ -846,11 +846,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: -0.000000014901161, y: 0.0000000037252903, z: -9.313226e-10, w: -1}
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 6.5279436
+    m_Target: 1.4779475
     speed: 2
-    m_Value: 6.246836
+    m_Value: 1.4779475
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -868,7 +868,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.19231154, y: 0.05354827, z: -0.010509904, w: -0.97981817}
+  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -906,9 +906,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 4ae80000
-      m_LastClickedID: 59466
-      m_ExpandedIDs: 4c4cfffff24cffffe08effffa4b5ffff6cc7ffffe4c7ffffc8c8ffff86cdffff12cefffff6cfffff9edaffff4edbffffe6dbffff6addffff7ce1ffffc0e2ffffc2e2ffff06e3ffffe0e3ffffeee4fffff0e4ffff4ce8ffffeee8fffff0eeffffd8effffffcf2ffffccf6ffff1afbffff2a7900007a7b0000447d0000187e0000367e0000867e0000107f000078810000a6860000428a0000648a0000f28a000058930000ce930000189e0000209e0000c4a2000012a300002ac50000d0c5000076c600001ee70000eee700001ae800000ee90000
+      m_SelectedIDs: 948e0000
+      m_LastClickedID: 36500
+      m_ExpandedIDs: 3ebaffff5cc8ffffbcd2ffff26fbffff22880000208e0000368e000078940000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

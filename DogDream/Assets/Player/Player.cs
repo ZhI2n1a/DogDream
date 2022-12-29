@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     public AudioSource GroundSound;
     public AudioSource JumpSound;
     public AudioSource LandingSoound;
-    public AudioSource DeadSound;
+    public AudioSource BoneSound;
 
     public bool BonusSofaMode = false;
     public GameObject BonusSofaCurrent;
@@ -101,11 +101,6 @@ public class Player : MonoBehaviour
         {
             GroundSound.Play();
         }
-
-        if (BonusSofaMode == true)
-        {
-            
-        }
     }
 
     private void ChechBackFliip()
@@ -166,8 +161,16 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.tag == "Obstacle")
         {
-            fucked = true;
-            controlling = false;
+            if (BonusSofaMode == true)
+            {
+                fucked = false;
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                fucked = true;
+                controlling = false;
+            }
         }
     }
 
@@ -178,6 +181,7 @@ public class Player : MonoBehaviour
             bones++;
             collision.gameObject.SetActive(false);
             PlayerPrefs.SetFloat("BoneCount", bones);
+            BoneSound.Play();
         }
 
         if (collision.gameObject.tag == "BonusSofa")
@@ -186,7 +190,7 @@ public class Player : MonoBehaviour
             BonusSofaCurrent = collision.gameObject;
             transform.eulerAngles = new Vector3(0, 0, 0);
             collision.gameObject.transform.SetParent(gameObject.transform);
-            collision.gameObject.transform.Translate(0, 0, 0);
+            collision.gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
         }
     }
 
