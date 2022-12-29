@@ -10,11 +10,11 @@ public class UIController : MonoBehaviour
     Player player;
     Text distance;
     Text bones;
-    
-
+    Text highScore;
 
     private void Awake()
     {
+        highScore = GameObject.Find("HighScore").GetComponent<Text>();
         player = GameObject.Find("Игрок").GetComponent<Player>();
         distance = GameObject.Find("Distance").GetComponent<Text>();
         bones = GameObject.Find("BoneCount").GetComponent<Text>();
@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
     void Update()
     {
         distance.text = Mathf.FloorToInt(player.distance) + "";
-        bones.text = "Bones: " + player.bones;
+        bones.text = player.bones + "";
+        highScore.text = Mathf.FloorToInt(player.highScore) + "";
     }
 }
