@@ -155,7 +155,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Boner"))
         {
             bones++;
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
 
         if (collision.gameObject.tag == "BonusSofa")
