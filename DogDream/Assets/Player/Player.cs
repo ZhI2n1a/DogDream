@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
 
                 if (sumRotZ > 160)
                 {
-                    bones += 5;
+                    bones += 1;
                     //StartCoroutine(SpeedBoost(10));
                 }
             }
