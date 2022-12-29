@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float backwRotation;
     public float distance = 0f;
     public float bones = 0f;
+    public float highScore = 0f;
 
     public bool fucked = false;
     public bool isGrounded = false;
@@ -37,11 +38,36 @@ public class Player : MonoBehaviour
     public bool BonusSofaMode = false;
     public GameObject BonusSofaCurrent;
 
+    private void Awake()
+    {
+        if(PlayerPrefs.HasKey("HighScore"))
+        {
+            highScore = PlayerPrefs.GetFloat("HighScore");
+        }
+
+        if (PlayerPrefs.HasKey("BoneCount"))
+        {
+            bones = PlayerPrefs.GetFloat("BoneCount");
+        }
+    }
+
     void Start()
     {
         groundCheck = GameObject.Find("GroundCheck").GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         boxColl = GetComponent<CapsuleCollider2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        PlayerSpeed();
+        distance += rb.velocity.x * Time.fixedDeltaTime;
+
+        if(distance > highScore)
+        {
+            highScore= distance;
+            PlayerPrefs.SetFloat("HighScore", highScore);
+        }
     }
 
     void Update()
@@ -129,11 +155,6 @@ public class Player : MonoBehaviour
         backwRotation = 500;
     }
 
-    private void FixedUpdate()
-    {
-        PlayerSpeed();
-        distance += rb.velocity.x * Time.fixedDeltaTime;
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -156,6 +177,7 @@ public class Player : MonoBehaviour
         {
             bones++;
             collision.gameObject.SetActive(false);
+            PlayerPrefs.SetFloat("BoneCount", bones);
         }
 
         if (collision.gameObject.tag == "BonusSofa")
