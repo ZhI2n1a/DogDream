@@ -28,13 +28,14 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb;
     public CapsuleCollider2D boxColl;
 
-    private float preRotZ = 0f;
-    private float sumRotZ = 0f;
-
     public AudioSource GroundSound;
     public AudioSource JumpSound;
     public AudioSource LandingSoound;
     public AudioSource BoneSound;
+    public AudioSource LogSound;
+    public AudioSource ObsSound;
+    public AudioSource DeadSound;
+    public AudioSource SofaSound;
 
     public bool BonusSofaMode = false;
     public GameObject BonusSofaCurrent;
@@ -46,7 +47,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        if(PlayerPrefs.HasKey("HighScore"))
+        PlayerPrefs.DeleteAll();
+
+        if (PlayerPrefs.HasKey("HighScore"))
         {
             highScore = PlayerPrefs.GetFloat("HighScore");
         }
@@ -54,7 +57,7 @@ public class Player : MonoBehaviour
         if (PlayerPrefs.HasKey("BoneCount"))
         {
             bones = PlayerPrefs.GetFloat("BoneCount");
-        }
+        };
     }
 
     void Start()
@@ -125,6 +128,8 @@ public class Player : MonoBehaviour
             if (transform.rotation.z > 0)
             {
                 float rotZ = transform.eulerAngles.z;
+                float sumRotZ = 0f;
+                float preRotZ = 0f;
                 if (rotZ > preRotZ)
                 {
                     sumRotZ += rotZ - preRotZ;
@@ -133,7 +138,7 @@ public class Player : MonoBehaviour
 
                 preRotZ = rotZ;
 
-                if (sumRotZ > 160)
+                if (sumRotZ > 160 && sumRotZ < 162)
                 {
                     bones += 1;
                     //StartCoroutine(SpeedBoost(10));
@@ -183,13 +188,16 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (isGrounded && ((transform.eulerAngles.z >= 90.0f && transform.eulerAngles.z <= 300.0f) || (transform.eulerAngles.z >= 300.0f && transform.eulerAngles.z <= 90.0f))) 
-        { 
+        {
+            DeadSound.Play();
             fucked = true;
             controlling = false;
         }
 
         if (collision.gameObject.tag == "Obstacle")
         {
+            ObsSound.Play();
+
             if (BonusSofaMode == true)
             {
                 fucked = false;
@@ -216,6 +224,7 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.tag == "BonusSofa")
         {
+            SofaSound.Play();
             StartCoroutine(BonusSofaTime(10));
             BonusSofaCurrent = collision.gameObject;
             transform.eulerAngles = new Vector3(0, 0, 0);
@@ -225,6 +234,7 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.tag == "BonusLog")
         {
+            LogSound.Play();
             StartCoroutine(BonusLogTime(5));
             BonusLogCurrent = collision.gameObject;
             transform.eulerAngles = new Vector3(0, 0, 0);
