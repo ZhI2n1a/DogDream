@@ -1208,7 +1208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262741884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.01, y: 1, z: 0}
+  m_LocalPosition: {x: 20.01, y: 0.2, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1229,7 +1229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3732383940247208765, guid: 8efb61b6457a53540847c8a1970162fd, type: 3}
   delay: 0
-  timerDelay: 30
+  timerDelay: 40
 --- !u!1 &297963348
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,6 +1391,10 @@ MonoBehaviour:
   BoneSound: {fileID: 344218461}
   BonusSofaMode: 0
   BonusSofaCurrent: {fileID: 3823443416027170709, guid: 91be220e6f09f0a4ebb24a4a6ab0c286, type: 3}
+  BonusLogMode: 0
+  BonusLogCurrent: {fileID: 3732383940247208765, guid: 8efb61b6457a53540847c8a1970162fd, type: 3}
+  up: 9
+  down: 8
 --- !u!50 &344218454
 Rigidbody2D:
   serializedVersion: 4
@@ -1493,8 +1497,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.44511944, y: -0.5831922}
-  m_Size: {x: 3.1845691, y: 0.9106907}
+  m_Offset: {x: 0.48771113, y: -0.5831922}
+  m_Size: {x: 4.8272667, y: 0.9106914}
   m_Direction: 1
 --- !u!82 &344218458
 AudioSource:
@@ -3237,7 +3241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 673756412}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.21, y: -0.07, z: 11.307708}
+  m_LocalPosition: {x: 17.21, y: 0.2, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3258,7 +3262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3823443416027170709, guid: 91be220e6f09f0a4ebb24a4a6ab0c286, type: 3}
   delay: 0
-  timerDelay: 15
+  timerDelay: 25
 --- !u!1 &685105757
 GameObject:
   m_ObjectHideFlags: 0

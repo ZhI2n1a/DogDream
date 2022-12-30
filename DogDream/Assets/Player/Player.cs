@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -37,6 +38,11 @@ public class Player : MonoBehaviour
 
     public bool BonusSofaMode = false;
     public GameObject BonusSofaCurrent;
+
+    public bool BonusLogMode = false;
+    public GameObject BonusLogCurrent;
+
+    [SerializeField] float up, down;
 
     private void Awake()
     {
@@ -101,6 +107,15 @@ public class Player : MonoBehaviour
         {
             GroundSound.Play();
         }
+
+        if (BonusLogMode == true)
+        {
+            transform.position = new Vector2
+            (
+                transform.position.x,
+                Math.Clamp(transform.position.y, down, up)
+            );
+        }
     }
 
     private void ChechBackFliip()
@@ -150,6 +165,20 @@ public class Player : MonoBehaviour
         backwRotation = 500;
     }
 
+    private IEnumerator BonusLogTime(float time)
+    {
+        horizontalSpeed = 10;
+        BonusLogMode = true;
+        controlling = false;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        yield return new WaitForSeconds(time);
+        Destroy(BonusLogCurrent);
+        BonusLogMode = false;
+        controlling = true;
+        horizontalSpeed = 7;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -165,6 +194,7 @@ public class Player : MonoBehaviour
             {
                 fucked = false;
                 Destroy(collision.gameObject);
+                StartCoroutine(BonusSofaTime(0));
             }
             else
             {
@@ -191,6 +221,15 @@ public class Player : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, 0);
             collision.gameObject.transform.SetParent(gameObject.transform);
             collision.gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+        }
+
+        if (collision.gameObject.tag == "BonusLog")
+        {
+            StartCoroutine(BonusLogTime(5));
+            BonusLogCurrent = collision.gameObject;
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            collision.gameObject.transform.SetParent(gameObject.transform);
+            collision.gameObject.transform.position = new Vector3(gameObject.transform.position.x + 0.2f, gameObject.transform.position.y - 0.2f, gameObject.transform.position.z);
         }
     }
 
