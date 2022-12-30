@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
         if (PlayerPrefs.HasKey("HighScore"))
         {
@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
 
                 if (sumRotZ > 160 && sumRotZ < 162)
                 {
-                    bones += 1;
+                    bones += 5;
                     //StartCoroutine(SpeedBoost(10));
                 }
             }

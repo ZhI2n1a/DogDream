@@ -3815,7 +3815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3823443416027170709, guid: 91be220e6f09f0a4ebb24a4a6ab0c286, type: 3}
   delay: 0
-  timerDelay: 5
+  timerDelay: 25
 --- !u!1 &685105757
 GameObject:
   m_ObjectHideFlags: 0
